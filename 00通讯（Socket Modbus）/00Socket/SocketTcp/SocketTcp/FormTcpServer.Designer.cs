@@ -33,15 +33,15 @@ namespace SocketTcp
 			this.label2 = new System.Windows.Forms.Label();
 			this.txt_ip = new System.Windows.Forms.TextBox();
 			this.txt_port = new System.Windows.Forms.TextBox();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.txt_revice = new System.Windows.Forms.TextBox();
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.lbOnline = new System.Windows.Forms.ListBox();
 			this.textBox3 = new System.Windows.Forms.TextBox();
 			this.btn_selectfile = new System.Windows.Forms.Button();
 			this.btn_startserver = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
+			this.button2 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -80,13 +80,13 @@ namespace SocketTcp
 			this.txt_port.TabIndex = 3;
 			this.txt_port.Text = "1234";
 			// 
-			// textBox1
+			// txt_revice
 			// 
-			this.textBox1.Location = new System.Drawing.Point(31, 43);
-			this.textBox1.Multiline = true;
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(330, 229);
-			this.textBox1.TabIndex = 4;
+			this.txt_revice.Location = new System.Drawing.Point(31, 43);
+			this.txt_revice.Multiline = true;
+			this.txt_revice.Name = "txt_revice";
+			this.txt_revice.Size = new System.Drawing.Size(330, 229);
+			this.txt_revice.TabIndex = 4;
 			// 
 			// textBox2
 			// 
@@ -131,13 +131,6 @@ namespace SocketTcp
 			this.btn_startserver.UseVisualStyleBackColor = true;
 			this.btn_startserver.Click += new System.EventHandler(this.btn_startserver_Click);
 			// 
-			// button2
-			// 
-			this.button2.Location = new System.Drawing.Point(0, 0);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 13;
-			// 
 			// button3
 			// 
 			this.button3.Location = new System.Drawing.Point(522, 394);
@@ -156,6 +149,13 @@ namespace SocketTcp
 			this.button4.Text = "选择文件";
 			this.button4.UseVisualStyleBackColor = true;
 			// 
+			// button2
+			// 
+			this.button2.Location = new System.Drawing.Point(522, 350);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(100, 23);
+			this.button2.TabIndex = 13;
+			// 
 			// FormTcpServer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -169,7 +169,7 @@ namespace SocketTcp
 			this.Controls.Add(this.textBox3);
 			this.Controls.Add(this.lbOnline);
 			this.Controls.Add(this.textBox2);
-			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.txt_revice);
 			this.Controls.Add(this.txt_port);
 			this.Controls.Add(this.txt_ip);
 			this.Controls.Add(this.label2);
@@ -191,15 +191,15 @@ namespace SocketTcp
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TextBox txt_ip;
 		private System.Windows.Forms.TextBox txt_port;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox txt_revice;
 		private System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.ListBox lbOnline;
 		private System.Windows.Forms.TextBox textBox3;
 		private System.Windows.Forms.Button btn_selectfile;
 		private System.Windows.Forms.Button btn_startserver;
-		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Button button2;
 	}
 }
 
