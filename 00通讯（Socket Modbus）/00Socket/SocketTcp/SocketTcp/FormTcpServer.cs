@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -10,14 +11,15 @@ namespace SocketTcp
 	public partial class FormTcpServer : Form
 	{
 		delegate void AddOnline(string ip, bool v);
-		delegate void ReciceData(string data);
+		delegate void ShowTip(string data);
 		AddOnline addOnline;
-		ReciceData reciceData;
+		ShowTip showTip;
+		Dictionary<string, Socket> Clients = new Dictionary<string, Socket>();
 		public FormTcpServer()
 		{
 			InitializeComponent();
 			addOnline = AddOnlineToListBox;
-			reciceData = ReciceDataToText;
+			showTip = ShowTipToText;
 		}
 
 		//创建套接字
@@ -37,7 +39,7 @@ namespace SocketTcp
 			try
 			{
 				socket.Bind(endPoint);				
-				Invoke(reciceData, "服务器开启成功");
+				Invoke(showTip, "服务器开启成功");
 			}
 			catch (Exception ex)
 			{
@@ -60,7 +62,8 @@ namespace SocketTcp
 				Socket client = socket.Accept();
 				string clientName = client.RemoteEndPoint.ToString();
 				Invoke(addOnline, clientName, true);
-				Invoke(reciceData, clientName + "上线");
+				Invoke(showTip, clientName + "上线");
+				Clients.Add(clientName, client);
 				//开启接受线程
 				Thread thr = new Thread(ReciveMsg);
 				thr.IsBackground = true;
@@ -82,14 +85,20 @@ namespace SocketTcp
 					//客户端断开连接
 					string clientName = client.RemoteEndPoint.ToString();
 					Invoke(addOnline, clientName, false);
-					Invoke(reciceData, clientName + "下线");
+					Invoke(showTip, clientName + "下线");
+					if (Clients.ContainsKey(clientName))
+					{
+						Clients.Remove(clientName);
+					}
 					//停止改客户端的数据接收
 					break;
 				}
 				else if(length > 0)
 				{
 					string str = Encoding.UTF8.GetString(arr, 0, length);
-					Invoke(reciceData, str);
+					string clientName = client.RemoteEndPoint.ToString();
+					string Msg = "[接收] " + clientName + "   " + str;
+					Invoke(showTip, Msg);
 				}
 			}
 			
@@ -108,9 +117,49 @@ namespace SocketTcp
 		}
 
 
-		private void ReciceDataToText(string data)
+		private void ShowTipToText(string data)
 		{
-			txt_revice.AppendText(data + Environment.NewLine);
+			txt_Tip.AppendText(data + Environment.NewLine);
+		}
+
+		private void btn_sendmsg_Click(object sender, EventArgs e)
+		{
+			string txt = txt_send.Text.Trim();
+			if (string.IsNullOrEmpty(txt))
+			{
+				MessageBox.Show("请设置发送内容");
+				return;
+			}
+			if (this.lbOnline.SelectedItems.Count == 0)
+			{
+				MessageBox.Show("请选择您要发送的对象");
+				return;
+			}
+			byte[] arrMsg = Encoding.UTF8.GetBytes(txt);
+			foreach (string item in this.lbOnline.SelectedItems)
+			{
+				Clients[item].Send(arrMsg);
+				string Msg = "[发送] " + item + "   " + txt;
+				Invoke(showTip, Msg);
+			}
+		}
+
+		private void btn_send_msg_all_Click(object sender, EventArgs e)
+		{
+			string txt = txt_send.Text.Trim();
+			if (string.IsNullOrEmpty(txt))
+			{
+				MessageBox.Show("请设置发送内容");
+				return;
+			}
+			byte[] arrMsg = Encoding.UTF8.GetBytes(txt);
+			foreach (string item in Clients.Keys)
+			{
+				Clients[item].Send(arrMsg);
+				string Msg = "[发送] " + item + "   " + txt;
+				Invoke(showTip, Msg);
+			}
+			Invoke(showTip, "[群发] 完毕!");
 		}
 	}
 }
