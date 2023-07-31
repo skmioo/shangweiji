@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -14,12 +15,15 @@ namespace SocketTcp
 		delegate void ShowTip(string data);
 		AddOnline addOnline;
 		ShowTip showTip;
+		//文件保存委托对象
+		FileSaveDelegate MyFileSave;
 		Dictionary<string, Socket> Clients = new Dictionary<string, Socket>();
 		public FormTcpServer()
 		{
 			InitializeComponent();
 			addOnline = AddOnlineToListBox;
 			showTip = ShowTipToText;
+			MyFileSave = FileSave;
 		}
 
 		//创建套接字
@@ -79,29 +83,51 @@ namespace SocketTcp
 				//定义一个2M的缓冲区
 				byte[] arr = new byte[2 * 1024 * 1024];
 				int length = -1;
-				length = client.Receive(arr);
-				if (length == 0)
+				try
 				{
-					//客户端断开连接
-					string clientName = client.RemoteEndPoint.ToString();
-					Invoke(addOnline, clientName, false);
-					Invoke(showTip, clientName + "下线");
-					if (Clients.ContainsKey(clientName))
+					length = client.Receive(arr);
+
+					if (length == 0)
 					{
-						Clients.Remove(clientName);
+						HandleClientUnLink(client);
+						//停止改客户端的数据接收
+						break;
 					}
+					else if (length > 0)
+					{
+						if (arr[0] == 0)
+						{
+							string str = Encoding.UTF8.GetString(arr, 0, length);
+							string clientName = client.RemoteEndPoint.ToString();
+							string Msg = "[接收] " + clientName + "   " + str;
+							Invoke(showTip, Msg);
+						}
+						if (arr[0] == 1)
+						{
+							Invoke(MyFileSave, arr, length);
+						}						
+					}
+				}
+				catch (Exception Ex)
+				{
+					HandleClientUnLink(client);
 					//停止改客户端的数据接收
 					break;
 				}
-				else if(length > 0)
-				{
-					string str = Encoding.UTF8.GetString(arr, 0, length);
-					string clientName = client.RemoteEndPoint.ToString();
-					string Msg = "[接收] " + clientName + "   " + str;
-					Invoke(showTip, Msg);
-				}
+			}			
+		}
+
+		private void HandleClientUnLink(Socket client)
+		{
+
+			//客户端断开连接
+			string clientName = client.RemoteEndPoint.ToString();
+			Invoke(addOnline, clientName, false);
+			Invoke(showTip, clientName + "下线");
+			if (Clients.ContainsKey(clientName))
+			{
+				Clients.Remove(clientName);
 			}
-			
 		}
 
 		private void AddOnlineToListBox(string url, bool isAdd)
@@ -161,5 +187,80 @@ namespace SocketTcp
 			}
 			Invoke(showTip, "[群发] 完毕!");
 		}
+
+		private void btn_OpenClient_Click(object sender, EventArgs e)
+		{
+			FormTcpClient form = new FormTcpClient();
+			form.Show();
+		}
+
+		private void btn_selectfile_Click(object sender, EventArgs e)
+		{
+			OpenFileDialog ofd = new OpenFileDialog();
+			ofd.InitialDirectory = "D:\\";
+			if (ofd.ShowDialog() == DialogResult.OK)
+			{
+				txt_file.Text = ofd.FileName;
+			}
+		}
+
+		private void btn_sendfile_Click(object sender, EventArgs e)
+		{
+			if (string.IsNullOrEmpty(txt_file.Text))
+			{
+				MessageBox.Show("请选择您要发送的文件！", "发送文件提示");
+				return;
+			}
+			string online = this.lbOnline.Text.Trim();
+			if (string.IsNullOrEmpty(online))
+			{
+				MessageBox.Show("请选择您要发送的对象！", "发送文件提示");
+				return;
+			}
+			using (FileStream fs = new FileStream(txt_file.Text, FileMode.Open))
+			{
+				string filename = Path.GetFileName(txt_file.Text);
+				string StrMsg = "发送文件为：" + filename;
+				byte[] arrMsg = Encoding.UTF8.GetBytes(StrMsg);
+				byte[] arrSend = new byte[arrMsg.Length + 1];
+				arrSend[0] = 0;
+				Buffer.BlockCopy(arrMsg, 0, arrSend, 1, arrMsg.Length);
+				Clients[online].Send(arrSend);
+
+				byte[] arrfileSend = new byte[1024 * 1024 * 2];
+				int length = fs.Read(arrfileSend, 0, arrfileSend.Length);
+
+				byte[] arrfile = new byte[length + 1];
+				arrfile[0] = 1;
+				Buffer.BlockCopy(arrfileSend, 0, arrfile, 1, length);
+				Clients[online].Send(arrfile);
+			}
+		}
+
+		private void FileSave(byte[] bt, int length)
+		{
+			try
+			{
+				SaveFileDialog sfd = new SaveFileDialog();
+				sfd.Filter = "word files(*.docx)|*.docx|txt files(*.txt)|*.txt|xls files(*.xls)|*.xls|All files(*.*)|*.*";
+				if (sfd.ShowDialog() == DialogResult.OK)
+				{
+					string fileSavePath = sfd.FileName;
+
+					using (FileStream fs = new FileStream(fileSavePath, FileMode.Create))
+					{
+						fs.Write(bt, 1, length - 1);
+						Invoke(new Action(() => this.txt_Tip.AppendText("[保存]     保存文件成功" + fileSavePath + Environment.NewLine)));
+					}
+
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("保存异常" + ex.Message, "保存文件出现异常");
+			}
+		}
+
 	}
+
 }

@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormTcpClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTcpClient.Designer.cs">
+      <DependentUpon>FormTcpClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormTcpServer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +60,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormTcpClient.resx">
+      <DependentUpon>FormTcpClient.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormTcpServer.resx">
       <DependentUpon>FormTcpServer.cs</DependentUpon>
     </EmbeddedResource>

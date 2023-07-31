@@ -36,12 +36,13 @@ namespace SocketTcp
 			this.txt_Tip = new System.Windows.Forms.TextBox();
 			this.txt_send = new System.Windows.Forms.TextBox();
 			this.lbOnline = new System.Windows.Forms.ListBox();
-			this.textBox3 = new System.Windows.Forms.TextBox();
+			this.txt_file = new System.Windows.Forms.TextBox();
 			this.btn_selectfile = new System.Windows.Forms.Button();
 			this.btn_startserver = new System.Windows.Forms.Button();
 			this.btn_send_msg_all = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
+			this.btn_SendFile = new System.Windows.Forms.Button();
 			this.btn_sendmsg = new System.Windows.Forms.Button();
+			this.btn_OpenClient = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -70,7 +71,7 @@ namespace SocketTcp
 			this.txt_ip.Name = "txt_ip";
 			this.txt_ip.Size = new System.Drawing.Size(118, 23);
 			this.txt_ip.TabIndex = 2;
-			this.txt_ip.Text = "192.168.40.55";
+			this.txt_ip.Text = "192.168.40.61";
 			// 
 			// txt_port
 			// 
@@ -104,15 +105,16 @@ namespace SocketTcp
 			this.lbOnline.ItemHeight = 17;
 			this.lbOnline.Location = new System.Drawing.Point(442, 200);
 			this.lbOnline.Name = "lbOnline";
+			this.lbOnline.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
 			this.lbOnline.Size = new System.Drawing.Size(240, 72);
 			this.lbOnline.TabIndex = 6;
 			// 
-			// textBox3
+			// txt_file
 			// 
-			this.textBox3.Location = new System.Drawing.Point(31, 542);
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(217, 23);
-			this.textBox3.TabIndex = 7;
+			this.txt_file.Location = new System.Drawing.Point(31, 542);
+			this.txt_file.Name = "txt_file";
+			this.txt_file.Size = new System.Drawing.Size(217, 23);
+			this.txt_file.TabIndex = 7;
 			// 
 			// btn_selectfile
 			// 
@@ -122,6 +124,7 @@ namespace SocketTcp
 			this.btn_selectfile.TabIndex = 8;
 			this.btn_selectfile.Text = "选择文件";
 			this.btn_selectfile.UseVisualStyleBackColor = true;
+			this.btn_selectfile.Click += new System.EventHandler(this.btn_selectfile_Click);
 			// 
 			// btn_startserver
 			// 
@@ -143,14 +146,15 @@ namespace SocketTcp
 			this.btn_send_msg_all.UseVisualStyleBackColor = true;
 			this.btn_send_msg_all.Click += new System.EventHandler(this.btn_send_msg_all_Click);
 			// 
-			// button4
+			// btn_SendFile
 			// 
-			this.button4.Location = new System.Drawing.Point(522, 441);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(100, 23);
-			this.button4.TabIndex = 12;
-			this.button4.Text = "选择文件";
-			this.button4.UseVisualStyleBackColor = true;
+			this.btn_SendFile.Location = new System.Drawing.Point(522, 441);
+			this.btn_SendFile.Name = "btn_SendFile";
+			this.btn_SendFile.Size = new System.Drawing.Size(100, 23);
+			this.btn_SendFile.TabIndex = 12;
+			this.btn_SendFile.Text = "发送文件";
+			this.btn_SendFile.UseVisualStyleBackColor = true;
+			this.btn_SendFile.Click += new System.EventHandler(this.btn_sendfile_Click);
 			// 
 			// btn_sendmsg
 			// 
@@ -161,17 +165,28 @@ namespace SocketTcp
 			this.btn_sendmsg.Text = "发送消息";
 			this.btn_sendmsg.Click += new System.EventHandler(this.btn_sendmsg_Click);
 			// 
+			// btn_OpenClient
+			// 
+			this.btn_OpenClient.Location = new System.Drawing.Point(522, 484);
+			this.btn_OpenClient.Name = "btn_OpenClient";
+			this.btn_OpenClient.Size = new System.Drawing.Size(100, 23);
+			this.btn_OpenClient.TabIndex = 14;
+			this.btn_OpenClient.Text = "打开客户端";
+			this.btn_OpenClient.UseVisualStyleBackColor = true;
+			this.btn_OpenClient.Click += new System.EventHandler(this.btn_OpenClient_Click);
+			// 
 			// FormTcpServer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(736, 589);
-			this.Controls.Add(this.button4);
+			this.Controls.Add(this.btn_OpenClient);
+			this.Controls.Add(this.btn_SendFile);
 			this.Controls.Add(this.btn_send_msg_all);
 			this.Controls.Add(this.btn_sendmsg);
 			this.Controls.Add(this.btn_startserver);
 			this.Controls.Add(this.btn_selectfile);
-			this.Controls.Add(this.textBox3);
+			this.Controls.Add(this.txt_file);
 			this.Controls.Add(this.lbOnline);
 			this.Controls.Add(this.txt_send);
 			this.Controls.Add(this.txt_Tip);
@@ -199,12 +214,13 @@ namespace SocketTcp
 		private System.Windows.Forms.TextBox txt_Tip;
 		private System.Windows.Forms.TextBox txt_send;
 		private System.Windows.Forms.ListBox lbOnline;
-		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.TextBox txt_file;
 		private System.Windows.Forms.Button btn_selectfile;
 		private System.Windows.Forms.Button btn_startserver;
 		private System.Windows.Forms.Button btn_send_msg_all;
-		private System.Windows.Forms.Button button4;
+		private System.Windows.Forms.Button btn_SendFile;
 		private System.Windows.Forms.Button btn_sendmsg;
+		private System.Windows.Forms.Button btn_OpenClient;
 	}
 }
 
