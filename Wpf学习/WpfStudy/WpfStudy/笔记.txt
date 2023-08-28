@@ -1,0 +1,9 @@
+﻿Border 边界
+
+Grid
+	属性里有RowDefinirion 添加一个个集合
+
+Panel
+	StackPanel(堆栈面板) 垂直或者水平排列	--Window3
+	WrapPanel 一行或者一列的方式来排列		--Window4
+	DockPanel 
