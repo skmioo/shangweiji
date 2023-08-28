@@ -1,9 +1,28 @@
-﻿Border 边界
+﻿
+左侧有文档大纲
 
-Grid
-	属性里有RowDefinirion 添加一个个集合
+Border 边界
 
 Panel
 	StackPanel(堆栈面板) 垂直或者水平排列	--Window3
-	WrapPanel 一行或者一列的方式来排列		--Window4
-	DockPanel 
+	WrapPanel 一行或者一列的方式来排列	(包裹)	--Window4
+	DockPanel 拉伸面板控件(很有意思的一个Pnal，比较难解释)		
+				--Window5
+	嵌套布局容器
+	DockPanel 里面嵌套WrapPanel或者StackPanel
+				--Window6
+
+Grid（最好用,基本可以实现所有的布局）
+	*调整行和列
+	*布局舍入
+	*跨越行和列
+	*分割窗口
+	*共享尺寸组
+	属性里有RowDefinirion 添加一个个集合
+				--Window7
+	共享尺寸组（SharedSizeGroup）
+
+Canvas面板使用Canvas面板进行基于坐标的布局 --Window8
+	*Canvas面板
+	*ZIndex顺序	
+	*InkCanvas元素		

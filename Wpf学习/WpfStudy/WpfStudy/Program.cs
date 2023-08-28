@@ -47,7 +47,7 @@ namespace WpfStudy
 		static void CreateWindow3()
 		{
 			Program app = new Program();
-			app.MainWindow = new Window3();
+			app.MainWindow = new Window7();
 			app.MainWindow.ShowDialog();
 		}
 	}
