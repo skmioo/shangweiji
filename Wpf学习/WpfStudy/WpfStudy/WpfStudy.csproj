@@ -69,6 +69,9 @@
     <Compile Include="00\Window7.xaml.cs">
       <DependentUpon>Window7.xaml</DependentUpon>
     </Compile>
+    <Compile Include="00\Window8.xaml.cs">
+      <DependentUpon>Window8.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="00\Window1.cs" />
     <Compile Include="00\Window3.xaml.cs">
@@ -118,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="00\Window7.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="00\Window8.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
