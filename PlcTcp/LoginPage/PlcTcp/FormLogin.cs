@@ -77,7 +77,7 @@ namespace LoginPage
 
 		private void btn_login_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("登录成功");
+			DialogResult = DialogResult.OK;
 		}
 
 		private void txt_Account_KeyDown(object sender, KeyEventArgs e)
@@ -86,6 +86,11 @@ namespace LoginPage
 			{
 				btn_login_Click(null, null);
 			}
+		}
+
+		private void Form_Login_Load(object sender, EventArgs e)
+		{
+			btn_login_Click(null,null);
 		}
 	}
 }

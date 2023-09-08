@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlcTcp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,12 @@ namespace LoginPage
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form_Login());
+			Form_Login frm = new Form_Login();
+			DialogResult dr = frm.ShowDialog();
+			if (dr == DialogResult.OK)
+			{
+				Application.Run(new FrmMain());
+			}	
 		}
 	}
 }

@@ -144,6 +144,7 @@ namespace LoginPage
 			this.Name = "Form_Login";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "1";
+			this.Load += new System.EventHandler(this.Form_Login_Load);
 			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lb_title_MouseDown);
 			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lb_title_MouseMove);
 			((System.ComponentModel.ISupportInitialize)(this.pic_close)).EndInit();
