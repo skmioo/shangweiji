@@ -23,7 +23,7 @@ namespace PlcTcp
 		public int Offset { get; set;}
 		public DataType DataType { get; set; }
 
-		internal string varValue;
+		private string varValue;
 		internal string VarValue {
 			get {
 				return varValue;
