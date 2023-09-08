@@ -25,4 +25,4 @@ Grid（最好用,基本可以实现所有的布局）
 Canvas面板使用Canvas面板进行基于坐标的布局 --Window8
 	*Canvas面板
 	*ZIndex顺序	
-	*InkCanvas元素		
+	*InkCanvas元素(手写笔，鼠标)		
