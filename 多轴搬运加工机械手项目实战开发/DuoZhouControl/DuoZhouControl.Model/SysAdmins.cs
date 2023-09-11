@@ -25,6 +25,6 @@ namespace DuoZhouControl.Model
         public bool Trend { get; set; }
 
         public bool UserManage { get; set; }
-
+       
     }
 }

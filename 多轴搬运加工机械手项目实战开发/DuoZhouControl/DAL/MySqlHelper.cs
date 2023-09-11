@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DuoZhouControl.DAL
 {
-	public static class MySqlHelper
+	public static class MySQLHelper
 	{
 		private static string ConStr = ConfigurationManager.ConnectionStrings["ConStr"].ToString();
 
