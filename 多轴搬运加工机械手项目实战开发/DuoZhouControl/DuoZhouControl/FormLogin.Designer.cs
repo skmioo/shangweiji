@@ -65,6 +65,7 @@ namespace DuoZhouControl
 			this.cmb_User.Name = "cmb_User";
 			this.cmb_User.Size = new System.Drawing.Size(158, 27);
 			this.cmb_User.TabIndex = 2;
+			this.cmb_User.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmb_User_KeyDown);
 			// 
 			// txt_LoginPwd
 			// 
@@ -75,6 +76,7 @@ namespace DuoZhouControl
 			this.txt_LoginPwd.Size = new System.Drawing.Size(158, 26);
 			this.txt_LoginPwd.TabIndex = 3;
 			this.txt_LoginPwd.Text = "123";
+			this.txt_LoginPwd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_LoginPwd_KeyDown);
 			// 
 			// btn_Login
 			// 
@@ -85,6 +87,7 @@ namespace DuoZhouControl
 			this.btn_Login.TabIndex = 4;
 			this.btn_Login.Text = "登录";
 			this.btn_Login.UseVisualStyleBackColor = true;
+			this.btn_Login.Click += new System.EventHandler(this.btn_Login_Click);
 			// 
 			// btn_Exit
 			// 
