@@ -1,0 +1,13 @@
+登录
+mysql -u root -p
+显示数据库
+show databases;
+使用数据库（database是数据库的名字）
+use database;
+use xktdmcdatabase;
+查看当前选择的数据库
+select database();
+显示表
+show tables;
+获取表里的内容
+select * from sysadmins;
