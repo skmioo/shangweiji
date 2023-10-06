@@ -87,6 +87,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Prism\ModuleNames.cs" />
     <Compile Include="Prism\RegionNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

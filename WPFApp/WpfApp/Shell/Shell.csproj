@@ -162,6 +162,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Skmioo.Application.Main\Skmioo.Application.Main.csproj">
+      <Project>{722f6ba5-5565-4879-ac37-b5dcd04fd0ca}</Project>
+      <Name>Skmioo.Application.Main</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Skmioo.Application.Share\Skmioo.Application.Share.csproj">
       <Project>{331c05d8-5d5a-4954-be9f-a42146855ed1}</Project>
       <Name>Skmioo.Application.Share</Name>
